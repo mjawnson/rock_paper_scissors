@@ -1,0 +1,104 @@
+<html>
+    <head>
+        <title>
+
+        </title>
+    </head>
+
+    <body>
+        <script>
+            function computerPlay() {
+                let ranInt = (Math.floor(Math.random()*3))
+                switch (ranInt) {
+                    case 0:
+                    compChoice = "Rock";
+                    break;
+
+                    case 1:
+                    compChoice = "Paper";
+                    break;
+
+                    case 2:
+                    compChoice = "Scissors";
+                    break;
+                }
+                return compChoice;
+            }
+            function playRound(playerSelection, computerSelection) {
+                switch (playerSelection.toString().toLowerCase()) {
+                    case ("rock"):
+                        switch (computerSelection.toLowerCase()) {
+                            case ("rock"): 
+                            console.log("Two rocks dont make a right, it's a tie!");
+                            return "tie"
+                            case ("paper"): 
+                            console.log("I wrapped you up, paper beats rock, I win!");
+                            return "computer win"
+                            case ("scissors"): 
+                            console.log("Smash, rock beats scissors, you win!");
+                            return "player win"
+                        }
+                    case ("paper"):
+                        switch (computerSelection.toLowerCase()) {
+                            case ("rock"): 
+                            console.log("You wrapped me up, paper beats rock, you win!");
+                            return "player win"
+                            case ("paper"): 
+                            console.log("It's almost a book, two papers, a tie!");
+                            return "tie"
+                            case ("scissors"): 
+                            console.log("I cut you up, I win!");
+                            return "computer win"
+                        }
+                    case ("scissors"):
+                            switch (computerSelection.toLowerCase()) {
+                            case ("rock"): 
+                            console.log("I smashed you, rock beats scissors, I win!");
+                            return "computer win"
+                            case ("paper"): 
+                            console.log("You cut me up, you win!");
+                            return "player win" 
+                            case ("scissors"): 
+                            console.log("We shouldn't run with these, two scissors, it's a tie!");
+                            return "tie"
+                            default:
+                            return "Error!"
+                        }
+                }
+            }
+            function game() {
+                let playerScore = 0;
+                let compScore = 0;
+                console.log("Best of 5 rounds wins! You pick first!")
+                for (i=1; i<=5; i++) {
+                    let playerSelection = prompt(`Round ${i}: Rock, Paper or Scissors sir?`, ` `);
+                    let result = playRound(playerSelection, computerPlay());
+                    if (result == "player win") {
+                        playerScore++
+                        console.log(`Damn, you won round ${i}.`);
+                    } else if (result == "computer win") {
+                        compScore++
+                        console.log(`Yes, I won round ${i}.`);
+                    } else if (result == "tie") {
+                        console.log(`Ok, round ${i} was tie!`);
+                    } else {
+                        console.error(`Something went wrong, replay this round...`)
+                        i--;
+                    }
+                }
+                if (playerScore > compScore) {
+                    console.log(`Well played sir, you beat me ${playerScore} to ${compScore}.`);
+                } else if (compScore > playerScore) {
+                    console.log(`Yes! I won ${compScore} to ${playerScore}.`)
+                }
+                let playAgain = window.confirm("Play again?");
+                if (playAgain) {
+                    game();
+                } else {
+                    console.log(`Ok, see you next time!`)
+                }
+            }
+        </script>
+
+    </body>
+</html>
